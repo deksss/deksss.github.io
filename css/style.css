@@ -1,0 +1,47 @@
+.node circle {
+	  fill: #fff;
+	  stroke: steelblue;
+	  stroke-width: 3px;
+	}
+
+.node rect {
+	  fill: #fff;
+	  stroke: steelblue;
+	  stroke-width: 3px;
+	}
+
+.node text { font: 12px sans-serif; }
+
+.link {
+	  fill: none;
+	  stroke: #ccc;
+	  stroke-width: 2px;
+	}
+
+#answerPanel {
+	min-height: 150px;
+}
+
+ html, body {
+ background: url("../images/p5_@2X.png") repeat;
+
+} 
+
+#main {
+background-color: #fff;
+margin-top: -20px; /* negative indent the amount of the padding to maintain the grid system */
+-webkit-border-radius: 0 0 6px 6px;
+-moz-border-radius: 0 0 6px 6px;
+border-radius: 0 0 6px 6px;
+-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+-moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+
+#listOfSubject {
+	border: 0;
+}
+
+#main > .panel  {
+    border: 0;
+}
