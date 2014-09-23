@@ -1,43 +1,7 @@
 $(document).ready(function() {
 
-    (function($, windod) {
-        $("#getStart, #goShemes").bind("click", function() {
-            $("#main").removeClass("hidden");
-            $("#home").addClass("hidden");
-            $("#about").addClass("hidden");
-            $("#help").addClass("hidden");
-        });
-        $("#goHome").bind("click", function() {
-            $("#goHome").addClass("active");
-            $("#home").removeClass("hidden");
-            $("#main").addClass("hidden");
-            $("#about").addClass("hidden");
-            $("#help").addClass("hidden");
-        });
-        $("#goHelp").bind("click", function() {
-
-            if (!$("#goHelp").hasClass('active')) {
-                $("#goHelp").parent().find('li').removeClass('active');
-                $("#goHelp").addClass('active');
-            }
-            $("#help").removeClass("hidden");
-            $("#main").addClass("hidden");
-            $("#about").addClass("hidden");
-            $("#home").addClass("hidden");
-        });
-        $("#goAbout").bind("click", function() {
-            $("#goAbout").addClass("active");
-            $("#about").removeClass("hidden");
-            $("#main").addClass("hidden");
-            $("#home").addClass("hidden");
-            $("#help").addClass("hidden");
-        });
-    })(jQuery, window);
-
-
-    var pageController = {};
-
-    pageController.elementList = [{
+var pageController = (function () {
+   var elementList = [{
         "id": "#getStart",
         "contentId": "#main"
     }, {
@@ -50,66 +14,102 @@ $(document).ready(function() {
         "id": "#goHelp",
         "contentId": "#help"
     }, {
-        "id": "#goAbou",
+        "id": "#goAbout",
         "contentId": "#about"
     }];
 
-    pageController.contentList = [
-        "#main", "#home", "#help", "#about"
-    ]
+var addHndl = function(element) {
+     var   elementBtn = element.id;
+     var target = element.contentId;
+        $(elementBtn).bind("click", function() {
+            if (!$(elementBtn).hasClass('active')) {
+                $(elementBtn).parent().find('li').removeClass('active');
+                $(elementBtn).addClass('active');
+                }
+            if ($(target).hasClass('hidden')) {
+                $('#main, #home, #about, #help').addClass('hidden');
+                $(target).removeClass('hidden');
+                }   
+        });
+    } 
 
-    pageController.controll = function() {
+    return {
+        load : function() {
         self = this;
-        self.elementList.forEach(self.addHndl);
+        elementList.forEach(addHndl);
     }
 
-    pageController.addHndl = function(element) {
-        if (!$(element).hasClass('active')) {
-            $(element).parent().find('li').removeClass('active');
-            $(element).addClass('active');
-        }
     }
-
-
-    var listOftheme = {
-        "itemShablon": ' <li><a id="{{id}}" href="#">{{name}}</a></li>',
-        "id": 0,
-        "curSelected": "null"
-    };
-
-
-    listOftheme.drawActive = function(element) {
-        self = this;
+})();
+  
+  var themeController = (function () {
+       var itemShablon = '<li><a id="{{id}}" href="#">{{name}}</a></li>';
+        var id = 0;
+        var curSelected = "null";
+        var answerMethod;
+         var drawGrafMethod;
+         var data;
+   selectedDraw = function(element) {
         element = element.parent();
-        if (self.curSelected !== "null") {
-            self.curSelected.removeClass("active");
+        if (curSelected !== "null") {
+           curSelected.removeClass("active");
         }
-        self.curSelected = element;
+       curSelected = element;
         element.addClass("active");
     }
 
-
-    listOftheme.load = function(drawGrafMethod, answerMethod, source) {
-        self = this;
-        $.getJSON(source, function(json) {
-            json.list.forEach(addItem);
-        });
-
         function addItem(item) {
-            var itemHTML = self.itemShablon;
-            var itemId = "listThemeItem" + (self.id++);
+          var target = $('#shemeApp');
+            var itemHTML = itemShablon;
+            var itemId = "listThemeItem" + (id++);
             itemHTML = itemHTML.replace("{{name}}", item.name);
             itemHTML = itemHTML.replace("{{id}}", itemId);
             $("#listOfSubject").append(itemHTML);
             $("#" + itemId).bind("click", function(e) {
+                $("#shemeApp").removeClass("hidden");
                 answerMethod(item.file);
                 drawGrafMethod(item.file);
-                self.drawActive($("#" + itemId));
-                $("#shemeApp").removeClass("hidden");
+                selectedDraw ($("#" + itemId)); 
+
             });
         };
-    }
+return {
+    load : function() {
+        $.getJSON(data, function(json) {
+            json.list.forEach(addItem);
+        });
+    },
+    setAnswerMethod : function ( method) {
+answerMethod = method;
+    },
 
-    listOftheme.load(drawGraf, answerApp, "js/listOftheme.json");
+    setDrawGrafMethod : function (method) {
+drawGrafMethod = method;
+    },
+    setData: function (source) {
+data = source;
+    }
+}
+  })();
+
+   
+   pageController.load();
+    answer = answerApp();
+    themeController.setAnswerMethod(answer.load);
+    themeController.setDrawGrafMethod(drawGraf);
+    themeController.setData("js/listOftheme.json");
+    themeController.load();
+
+
+
+$('.minimize').bind("click", function(e) {
+    var target = $(this).parent().first().next();
+    if(!target.hasClass('hidden')) {
+    target.addClass('hidden');
+} else {
+    target.removeClass('hidden');
+}
+
+});
 
 });
