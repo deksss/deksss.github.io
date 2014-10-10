@@ -60,6 +60,8 @@
           </div>
       </div>
        <div id="about" class="container-fluid hidden"> 
+ <div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
             <h2>О проекте</h2> 
             <p>
 Читая психологическую литературу и статьи по самотерапии, я пришел 
@@ -70,6 +72,8 @@
 мы создали этот сервис. Надеемся, что он поможет тем, кто будет искать
  в нём ответы на свои вопросы.
             </p>
+            </div>
+            </div>
       </div>  
       <div id="help" class="container-fluid hidden"> 
             <h2>Помощь</h2> 
@@ -120,16 +124,16 @@
                   <div class="panel-heading">
       <div class="panel-title">
           <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Что вас беспокоит?&hellip;">
+                  <input id="themeInput" type="text" class="form-control" placeholder="Что вас беспокоит?&hellip;">
                   <span class="input-group-btn">                    
-                  <button type="button" class="btn btn-default">Поиск</button>
+                  <button id="findTheme" type="button" class="btn btn-default">Поиск</button>
                   </span>   
                </div>
       </div>        
                       </div>
 <ul class="nav nav-pills" id="listOfSubject">
-
 </ul>
+<a href="#" class="btn btn-default btn-xs btn-block minimize"><span class="glyphicon glyphicon-chevron-up"></span></a>
             </div>
 
          <div id="shemeApp" class="row hidden">
@@ -137,44 +141,9 @@
                <div class="row">
                   <div class="col-xs-12 col-md-12 col-lg-6 col-lg-offset-3">            
                      <!-- Answer form -->
-                      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-12"> 
-                     <div class="panel panel-default" id="answerPanel">
-                        <div class="panel-heading">
-                           <button id="buttonBack" class="btn btn-default btn-sm">
-                           <span class="glyphicon glyphicon-chevron-left">
-                           </span>
-                        </button>
-                        Шаг <span id="stageNumber"></span>
-                        </div>
-                        <form id="answerForm" class="form-horizontal">
-                           <div class="form-group">
-                              <div class="col-xs-12">
-                                 <h4 class="text-center" id="stageCaption">
-                                 </h4>
-                              </div>
-                              <div class=" col-xs-4">
-                                 <div class="pull-right">
-                                    <button id="leftButton" type="submit" class="btn btn-primary btn-lg hidden">
-                                    </button>
-                                 </div>
-                              </div>
-                              <div class=" col-xs-4">
-                                 <div class="pull-center">
-                                    <button id="centerButton" type="submit" class="btn btn-primary btn-block hidden">
-                                    </button>
-                                 </div>
-                              </div>
-                              <div class="col-xs-4">
-                                 <div class="pull-left">
-                                    <button id="rightButton" type="submit" class="btn btn-primary btn-lg hidden">
-                                    </button>
-                                 </div>
-                              </div>
-                           </div>
-                        </form>
-                     </div>
+                      <div id="answerContainer" class="col-xs-12 col-sm-12 col-md-4 col-lg-12"> 
                   </div>
-                  <!-- tooltip md -->
+                  <!-- lg>tooltip>xs -->
                    <div class="hidden-lg col-md-8 col-xs-12 col-sm-12">
                <div id="tooltipMd" class="panel panel-default">
                tooooooooltip                 
@@ -183,13 +152,15 @@
                                  
             </div>
              <div class="clearfix visible-md-block"></div>
+              <!-- shema -->
                   <div class="hidden-xs col-sm-12 col-lg-12 ">
                      <h3 class="text-center">Визуальная схема:</h3>
-                     <div id="diagramView" class="panel panel-default">
+                     <div id="diagram" class="panel panel-default">
                      </div>
                   </div>
                </div>
             </div>
+            <!-- tooltip lg -->
             <div class="hidden-md hidden-sm hidden-xs col-lg-4">
                <div id="tooltip" class="panel panel-default">                
                </div>
