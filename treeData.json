@@ -7,7 +7,7 @@
     "children": [
           {
             "name": "начать",
-            "parent": "Вы лолка",
+            "parent": "test",
             "figure": "line",
             "tooltip": "",
             "children": [
@@ -30,22 +30,22 @@
                     "tooltip": "",
                     "children": [
                       {
-                        "name": "пидора ответ, сосайте!(да-да)",
+                        "name": "mda",
                         "parent": "нет",
                         "figure": "rect",
-                        "tooltip": "Ппц",
+                        "tooltip": "oh...",
                             "children": [
                       {
                         "name": "ок",
                         "parent": "нет",
                         "figure": "line",
-                        "tooltip": "Ппц",
+                        "tooltip": "oh",
                             "children": [
                       {
                         "name": "ммм",
                         "parent": "нет",
                         "figure": "rect",
-                        "tooltip": "Ппц"
+                        "tooltip": "..."
                       }
                     ]
                       }
